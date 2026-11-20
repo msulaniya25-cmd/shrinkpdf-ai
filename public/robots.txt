@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shrinkpdf-ai-8leu.vercel.app/sitemap.xml

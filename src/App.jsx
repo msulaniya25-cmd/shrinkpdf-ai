@@ -18,11 +18,11 @@ const SEO_PAGES = [
     label: 'Home',
     targetSizeKB: null,
     preset: 'recommended',
-    metaTitle: 'Free Online PDF Compressor – Compress PDF to 50KB, 100KB, 200KB, 500KB & 1MB',
-    metaDescription: 'Compress PDF files online for free. Reduce PDF file size to 50KB, 100KB, 200KB, 300KB, 500KB, 1MB or 2MB without unnecessary complexity. Upload your PDF and download in seconds.',
+    metaTitle: 'Free PDF Compressor Online – Compress PDF to 50KB, 100KB, 200KB, 500KB & 1MB',
+    metaDescription: 'Use this free PDF compressor online to reduce PDF file size to 50KB, 100KB, 200KB, 300KB, 500KB, 1MB or 2MB. Compress PDF files in your browser and download in seconds.',
     h1: 'Free Online PDF Compressor – Compress PDF to 50KB, 100KB, 200KB, 500KB & 1MB',
     subtitle: 'Compress PDF files online for free. Reduce PDF file size to 50KB, 100KB, 200KB, 300KB, 500KB, 1MB or 2MB without unnecessary complexity. Upload your PDF and download the compressed file in seconds.',
-    focusKeyword: 'pdf compressor',
+    focusKeyword: 'free pdf compressor online',
     badge: 'AI-Powered Iterative Engine',
     useCaseTitle: 'Why Choose ShrinkPDF AI Over Traditional Tools?',
     useCaseIntro: 'Whether you are submitting government portal forms, emailing large portfolios, or archiving invoices, our adaptive compression engine balances DPI resolution and JPEG chroma subsampling to hit exact KB thresholds.',
@@ -43,8 +43,11 @@ const SEO_PAGES = [
       {
         q: 'Why didn’t my 15MB scanned PDF reach exactly 50KB?',
         a: 'Multi-page scanned PDFs consist of embedded raster images. Reducing 20 pages of images down to 50KB (2.5KB per page) would make text unreadable. When an exact target is physically impossible without destroying legibility, our engine delivers the smallest readable size.'
-      }
-    ]
+      },
+      { q: 'Can I reduce PDF file size online without installing software?', a: 'Yes. Open ShrinkPDF AI in a modern browser, upload your PDF, choose a target size, and download the compressed file. No desktop installation is required.' },
+      { q: 'Can I compress a PDF without losing quality?', a: 'Compression may affect image resolution depending on the document and target size. ShrinkPDF AI aims to balance file size and readability, but the result depends on the original PDF.' },
+      { q: 'Is ShrinkPDF AI a free PDF size reducer?', a: 'Yes. You can use the available target-size presets to reduce PDF files, including 50KB, 100KB, 200KB, 300KB, 500KB, 1MB, and 2MB.' }
+        ]
   },
   {
     slug: 'pdf-compressor-online',
@@ -79,7 +82,7 @@ const SEO_PAGES = [
     targetSizeKB: 50,
     preset: '50',
     metaTitle: 'PDF Compressor to 50KB – Shrink PDF Under 50KB for Online Portals',
-    metaDescription: 'Compress PDF to 50KB online for free. Ideal for government exam applications, passport portals, and strict upload limits.',
+    metaDescription: 'Compress PDF to 50KB online for free. Reduce PDF file size for government forms, exam applications, passport portals, and strict upload limits.',
     h1: 'PDF Compressor to 50KB – Optimize Documents for Strict Upload Limits',
     subtitle: 'Specifically calibrated to reduce 1–2 page certificates, IDs, and application forms under the strict 50KB portal threshold.',
     focusKeyword: 'pdf compressor to 50kb',
@@ -105,7 +108,7 @@ const SEO_PAGES = [
     targetSizeKB: 100,
     preset: '100',
     metaTitle: 'PDF Compressor to 100KB – Reduce PDF File Size Under 100KB Free',
-    metaDescription: 'Compress PDF to 100KB online without losing readability. Perfect for resumes, bank statements, and official application attachments.',
+    metaDescription: 'Reduce PDF size to 100KB online for free. Ideal for resumes, bank statements, job applications, and official document uploads.',
     h1: 'PDF Compressor to 100KB – Crisp Resumes & Official Documents Under 100KB',
     subtitle: 'Hit the sweet spot for job portals, visa applications, and banking uploads by shrinking your PDF cleanly to 100KB.',
     focusKeyword: 'pdf compressor to 100kb',
@@ -280,6 +283,57 @@ const SEO_PAGES = [
         q: 'Can I set a custom target file size in KB?',
         a: 'Yes! Select "Custom Target Size" in the compressor tool above and enter any size from 30KB up to 10,000KB.'
       }
+    ]
+  },
+  {
+    slug: 'about-us', path: '/about-us', label: 'About Us', isLegal: true,
+    metaTitle: 'About Us – ShrinkPDF AI',
+    metaDescription: 'Learn about ShrinkPDF AI, a browser-based tool designed to help people compress PDF files quickly and privately.',
+    h1: 'About ShrinkPDF AI',
+    legalSections: [
+      { title: 'Our Mission', body: ['ShrinkPDF AI is an online PDF compression tool built to make reducing PDF file sizes simple and accessible. Our goal is to help students, job applicants, professionals, and everyday users prepare documents for upload limits and sharing.'] },
+      { title: 'What We Offer', body: ['The tool provides target-size options such as 50KB, 100KB, 200KB, 300KB, 500KB, 1MB, and 2MB, along with a recommended compression option.', 'The service is designed to work in a modern web browser, without requiring users to install a desktop application. Actual compression results depend on the contents and size of the original PDF.'] },
+      { title: 'Privacy Approach', body: ['PDF processing is performed in your browser using client-side technology. We do not intend to permanently store the PDF documents you process. Please review our Privacy Policy for more information.'] },
+      { title: 'Contact', body: ['Questions, feedback, or suggestions are welcome. Email us at msulaniya25@gmail.com.'] }
+    ]
+  },
+  {
+    slug: 'contact-us', path: '/contact-us', label: 'Contact Us', isLegal: true,
+    metaTitle: 'Contact Us – ShrinkPDF AI',
+    metaDescription: 'Contact ShrinkPDF AI for support, feedback, questions, or website-related enquiries.',
+    h1: 'Contact Us',
+    legalSections: [
+      { title: 'We Are Here to Help', body: ['If you have a question about using the PDF compressor, want to report a problem, or have feedback about the website, please contact us by email.'] },
+      { title: 'Email Support', body: ['Email: msulaniya25@gmail.com', 'Please include a clear subject and describe the issue. Do not email confidential documents or sensitive personal information unless it is necessary and you are comfortable sharing it.'] },
+      { title: 'Response Time', body: ['We aim to review messages and respond as reasonably possible. Response times may vary.'] }
+    ]
+  },
+  {
+    slug: 'privacy-policy', path: '/privacy-policy', label: 'Privacy Policy', isLegal: true,
+    metaTitle: 'Privacy Policy – ShrinkPDF AI',
+    metaDescription: 'Read the ShrinkPDF AI Privacy Policy to understand browser-based PDF processing, information, cookies, and advertising.',
+    h1: 'Privacy Policy',
+    legalSections: [
+      { title: 'Information and PDF Files', body: ['ShrinkPDF AI is designed to process PDF files locally in your browser. The website does not intend to upload or permanently store the PDF documents you select for compression. Processing behavior can depend on your browser and device.', 'Please avoid using the service for documents if you are not comfortable processing them on your own device or if your organization prohibits using browser-based tools.'] },
+      { title: 'Website Usage Information', body: ['Like many websites, hosting, security, and analytics services may process limited technical information such as browser type, device information, approximate location, pages visited, and diagnostic logs to operate and protect the website.'] },
+      { title: 'Cookies and Advertising', body: ['The website may use cookies or similar technologies for functionality, measurement, and advertising. If Google AdSense or other advertising partners display ads, they may use cookies or similar technologies subject to their own policies and applicable settings.', 'You can manage cookies through your browser settings. You may also review Google’s advertising and privacy controls in your Google account.'] },
+      { title: 'Third-Party Services', body: ['The website may rely on third-party providers for hosting, security, analytics, or advertising. Those providers process information under their own terms and privacy policies.'] },
+      { title: 'Children’s Privacy', body: ['This website is not intentionally designed to collect personal information from children. If you believe a child has provided personal information, contact us so we can review the concern.'] },
+      { title: 'Policy Updates and Contact', body: ['We may update this Privacy Policy when the website or applicable requirements change. Updates will be posted on this page.', 'For privacy questions, contact msulaniya25@gmail.com.'] }
+    ]
+  },
+  {
+    slug: 'terms-and-conditions', path: '/terms-and-conditions', label: 'Terms & Conditions', isLegal: true,
+    metaTitle: 'Terms & Conditions – ShrinkPDF AI',
+    metaDescription: 'Read the terms and conditions for using the ShrinkPDF AI online PDF compression service.',
+    h1: 'Terms & Conditions',
+    legalSections: [
+      { title: 'Acceptance of Terms', body: ['By accessing or using ShrinkPDF AI, you agree to these Terms & Conditions. If you do not agree, please do not use the website.'] },
+      { title: 'Use of the Service', body: ['You may use the website for lawful personal or business purposes. You are responsible for ensuring that you have the rights and permissions needed to process any document you select.', 'You agree not to misuse the website, interfere with its operation, attempt unauthorized access, or use it in violation of applicable laws.'] },
+      { title: 'Compression Results', body: ['PDF compression results vary depending on the source document, embedded images, fonts, and selected target size. We do not guarantee that every PDF can reach an exact file size or retain identical visual quality after compression.', 'Always review the downloaded file before submitting, sharing, or relying on it. Keep your own backup of important documents.'] },
+      { title: 'Availability and Disclaimer', body: ['The website is provided on an “as available” basis. We may modify, suspend, or discontinue features at any time. To the extent permitted by law, we disclaim warranties regarding availability, accuracy, and fitness for a particular purpose.'] },
+      { title: 'Limitation of Liability', body: ['To the extent permitted by applicable law, ShrinkPDF AI and its operators will not be liable for indirect, incidental, or consequential loss arising from use of the website. Nothing in these terms excludes liability that cannot legally be excluded.'] },
+      { title: 'Changes and Contact', body: ['We may update these terms by publishing a revised version on this page. Continued use of the website after changes means you accept the updated terms.', 'For questions about these terms, contact msulaniya25@gmail.com.'] }
     ]
   }
 ];
@@ -1190,7 +1244,7 @@ Return valid JSON matching the exact schema.`;
     const urls = published
       .map(
         (p) => `  <url>
-    <loc>https://shrinkpdf.ai${p.path}</loc>
+    <loc>https://shrinkpdf-ai-8leu.vercel.app${p.path}</loc>
     <lastmod>2026-11-19</lastmod>
     <changefreq>${p.slug === '/' ? 'daily' : 'weekly'}</changefreq>
     <priority>${p.slug === '/' ? '1.0' : '0.85'}</priority>
@@ -1200,7 +1254,7 @@ Return valid JSON matching the exact schema.`;
     return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>`;
   }, [pages]);
 
-  const robotsTxt = `User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /api/\n\nSitemap: https://shrinkpdf.ai/sitemap.xml`;
+  const robotsTxt = `User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /api/\n\nSitemap: https://shrinkpdf-ai-8leu.vercel.app/sitemap.xml`;
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -1785,7 +1839,10 @@ Return valid JSON matching the exact schema.`;
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [pages, setPages] = useState(SEO_PAGES);
-  const [currentRoute, setCurrentRoute] = useState('/'); // '/', slug, 'admin', or '404'
+  const getRouteFromPath = () => { const path = window.location.pathname.replace(/\/$/, '') || '/'; return path === '/admin' ? 'admin' : path === '/' ? '/' : path.slice(1); };
+  const [currentRoute, setCurrentRoute] = useState(getRouteFromPath); // '/', slug, 'admin', or '404'
+
+  useEffect(() => { const handlePopState = () => setCurrentRoute(getRouteFromPath()); window.addEventListener('popstate', handlePopState); return () => window.removeEventListener('popstate', handlePopState); }, []);
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
   const [showSeoInspector, setShowSeoInspector] = useState(false);
 
@@ -1805,6 +1862,10 @@ export default function App() {
         document.head.appendChild(metaDesc);
       }
       metaDesc.setAttribute('content', activePage.metaDescription);
+      const canonicalUrl = `https://shrinkpdf-ai-8leu.vercel.app${activePage.path}`;
+      let canonical = document.querySelector('link[rel="canonical"]');
+      if (!canonical) { canonical = document.createElement('link'); canonical.setAttribute('rel', 'canonical'); document.head.appendChild(canonical); }
+      canonical.setAttribute('href', canonicalUrl);
     } else if (currentRoute === 'admin') {
       document.title = 'Admin SEO Studio – ShrinkPDF AI';
     } else {
@@ -1814,6 +1875,8 @@ export default function App() {
   }, [activePage, currentRoute]);
 
   const navigateTo = (slug) => {
+    const nextPath = slug === 'admin' ? '/admin' : slug === '/' ? '/' : `/${slug}`;
+    if (window.location.pathname !== nextPath) window.history.pushState({}, '', nextPath);
     setCurrentRoute(slug);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -1827,7 +1890,7 @@ export default function App() {
         {
           '@type': 'WebSite',
           name: 'ShrinkPDF AI',
-          url: 'https://shrinkpdf.ai/'
+          url: 'https://shrinkpdf-ai-8leu.vercel.app/'
         },
         {
           '@type': 'SoftwareApplication',
@@ -1843,9 +1906,9 @@ export default function App() {
         {
           '@type': 'BreadcrumbList',
           itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://shrinkpdf.ai/' },
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://shrinkpdf-ai-8leu.vercel.app/' },
             ...(activePage.slug !== '/'
-              ? [{ '@type': 'ListItem', position: 2, name: activePage.label, item: `https://shrinkpdf.ai${activePage.path}` }]
+              ? [{ '@type': 'ListItem', position: 2, name: activePage.label, item: `https://shrinkpdf-ai-8leu.vercel.app${activePage.path}` }]
               : [])
           ]
         },
@@ -1965,7 +2028,7 @@ export default function App() {
               <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
                 <div>
                   <span className="font-bold text-blue-600 dark:text-blue-400 block mb-1">Canonical URL & Focus Keyword</span>
-                  <div className="font-mono text-slate-800 dark:text-slate-200">https://shrinkpdf.ai{activePage.path}</div>
+                  <div className="font-mono text-slate-800 dark:text-slate-200">https://shrinkpdf-ai-8leu.vercel.app{activePage.path}</div>
                   <div className="mt-1">Keyword: <span className="font-bold">{activePage.focusKeyword}</span></div>
                 </div>
                 <div>
@@ -2015,6 +2078,20 @@ export default function App() {
                 Go to PDF Compressor Home
               </button>
             </div>
+          ) : activePage.isLegal ? (
+            <section className="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+              <nav aria-label="Breadcrumb" className="text-sm text-slate-500 mb-6"><button onClick={() => navigateTo('/')} className="hover:text-blue-600">Home</button><span className="mx-2">/</span><span>{activePage.label}</span></nav>
+              <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-8">{activePage.h1}</h1>
+              <div className="space-y-8 text-slate-700 dark:text-slate-300 leading-7">
+                {activePage.legalSections.map((section) => (
+                  <section key={section.title}>
+                    <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{section.title}</h2>
+                    {section.body.map((paragraph, index) => <p key={index} className="mb-3">{paragraph.includes('msulaniya25@gmail.com') ? <>{paragraph.split('msulaniya25@gmail.com')[0]}<a className="text-blue-600 hover:underline" href="mailto:msulaniya25@gmail.com">msulaniya25@gmail.com</a>{paragraph.split('msulaniya25@gmail.com')[1]}</> : paragraph}</p>)}
+                  </section>
+                ))}
+              </div>
+              <p className="mt-10 text-xs text-slate-500">Last updated: November 21, 2026</p>
+            </section>
           ) : (
             /* ============================================================
                HOMEPAGE & DEDICATED SEO LANDING PAGES
@@ -2335,7 +2412,7 @@ export default function App() {
               <div className="md:col-span-1">
                 <div className="flex items-center gap-2 text-white font-extrabold text-lg mb-3">
                   <FileCheck2 className="w-5 h-5 text-blue-500" />
-                  <span>ShrinkPDF.ai</span>
+                  <span>ShrinkPDF AI</span>
                 </div>
                 <p className="text-xs leading-relaxed text-slate-400">
                   Free, private, browser-based online PDF compressor with exact target KB calibration and AI-powered SEO publishing tools.
@@ -2395,15 +2472,17 @@ export default function App() {
                       XML Sitemap & Robots.txt
                     </button>
                   </li>
-                  <li className="text-slate-500 pt-1">
-                    Not affiliated with Adobe Inc.
-                  </li>
+                  {['about-us', 'contact-us', 'privacy-policy', 'terms-and-conditions'].map((slug) => {
+                    const page = pages.find((item) => item.slug === slug);
+                    return page ? <li key={slug}><button onClick={() => navigateTo(slug)} className="hover:text-white transition-colors">{page.label}</button></li> : null;
+                  })}
+                  <li className="text-slate-500 pt-1">Not affiliated with Adobe Inc.</li>
                 </ul>
               </div>
             </div>
 
             <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-              <p>© {new Date().getFullYear()} ShrinkPDF.ai — Free Online PDF Compressor. All rights reserved.</p>
+              <p>© {new Date().getFullYear()} ShrinkPDF AI — Free Online PDF Compressor. All rights reserved.</p>
               <p>Zero server retention • Sandboxed PDF processing</p>
             </div>
           </div>

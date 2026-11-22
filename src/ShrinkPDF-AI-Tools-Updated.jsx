@@ -509,6 +509,12 @@ function ExtraPdfTools() {
   const [range, setRange] = useState('1');
   const [watermark, setWatermark] = useState('CONFIDENTIAL');
   const [signature, setSignature] = useState('Your Name');
+  const [pageOrder, setPageOrder] = useState('1,2,3');
+  const [metaTitle, setMetaTitle] = useState('');
+  const [metaAuthor, setMetaAuthor] = useState('');
+  const [metaSubject, setMetaSubject] = useState('');
+  const [formFields, setFormFields] = useState([]);
+  const [formValues, setFormValues] = useState({});
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
   const inputRef = useRef(null);
@@ -655,6 +661,65 @@ function ExtraPdfTools() {
         const archive = await zip.generateAsync({ type: 'blob' });
         const url = URL.createObjectURL(archive); const a = document.createElement('a'); a.href = url; a.download = 'shrinkpdf-pages-jpg.zip'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1500);
         setMessage('PDF ke sabhi pages JPG ZIP mein download ho gaye.');
+      } else if (mode === 'delete' || mode === 'reorder' || mode === 'metadata') {
+        const f = files[0]; if (!/\.pdf$/i.test(f.name)) throw new Error('PDF file select karein.');
+        const doc = await PDFDocument.load(await f.arrayBuffer());
+        if (mode === 'delete') {
+          const pageCount = doc.getPageCount();
+          const indexes = range.split(',').flatMap(part => {
+            const m = part.trim().match(/^(\d+)(?:\s*-\s*(\d+))?$/); if (!m) return [];
+            const a = Number(m[1]), b = Number(m[2] || m[1]);
+            return Array.from({ length: Math.max(0, b - a + 1) }, (_, i) => a + i - 1);
+          });
+          const unique = [...new Set(indexes)].filter(i => i >= 0 && i < pageCount).sort((a,b) => b-a);
+          if (!unique.length) throw new Error(`Delete karne ke liye valid page numbers dein. Is PDF mein ${pageCount} pages hain.`);
+          if (unique.length === pageCount) throw new Error('Saare pages delete nahi kar sakte. Kam se kam ek page rehna chahiye.');
+          unique.forEach(i => doc.removePage(i));
+          saveBlob(await doc.save(), 'shrinkpdf-pages-deleted.pdf');
+          setMessage(`${unique.length} page(s) delete ho gaye.`);
+        } else if (mode === 'reorder') {
+          const count = doc.getPageCount();
+          const order = pageOrder.split(',').map(v => Number(v.trim()));
+          if (order.length !== count || order.some(n => !Number.isInteger(n) || n < 1 || n > count) || new Set(order).size !== count) {
+            throw new Error(`Page order mein 1 se ${count} tak har page number ek baar likhein. Example: ${Array.from({length:count}, (_,i)=>i+1).join(',')}`);
+          }
+          const out = await PDFDocument.create();
+          const copied = await out.copyPages(doc, order.map(n => n - 1)); copied.forEach(page => out.addPage(page));
+          saveBlob(await out.save(), 'shrinkpdf-reordered.pdf');
+          setMessage('PDF pages naye order mein download ho gaye.');
+        } else {
+          if (metaTitle.trim()) doc.setTitle(metaTitle.trim());
+          if (metaAuthor.trim()) doc.setAuthor(metaAuthor.trim());
+          if (metaSubject.trim()) doc.setSubject(metaSubject.trim());
+          doc.setModificationDate(new Date());
+          saveBlob(await doc.save(), 'shrinkpdf-metadata-updated.pdf');
+          setMessage('PDF metadata update karke download kar diya.');
+        }
+      } else if (mode === 'forms') {
+        const f = files[0]; if (!/\.pdf$/i.test(f.name)) throw new Error('PDF file select karein.');
+        const doc = await PDFDocument.load(await f.arrayBuffer());
+        const form = doc.getForm();
+        const fields = form.getFields().map(field => {
+          const type = field.constructor.name;
+          return { name: field.getName(), type: type.includes('CheckBox') ? 'checkbox' : type.includes('Dropdown') ? 'dropdown' : type.includes('RadioGroup') ? 'radio' : type.includes('OptionList') ? 'options' : type.includes('TextField') ? 'text' : 'unsupported', options: type.includes('Dropdown') || type.includes('RadioGroup') || type.includes('OptionList') ? (field.getOptions?.() || []) : [] };
+        });
+        if (!formFields.length) {
+          if (!fields.length) throw new Error('Is PDF mein fillable form fields nahi mile. Yeh tool sirf existing interactive PDF fields bhar sakta hai.');
+          setFormFields(fields);
+          setFormValues(Object.fromEntries(fields.map(field => [field.name, field.type === 'checkbox' ? false : ''])));
+          setMessage(`${fields.length} form fields mile. Neeche values bharein, phir Fill & Download dabayein.`);
+        } else {
+          for (const field of fields) {
+            const value = formValues[field.name];
+            if (field.type === 'text' && value !== undefined) form.getTextField(field.name).setText(String(value));
+            else if (field.type === 'checkbox') { const checkbox = form.getCheckBox(field.name); value ? checkbox.check() : checkbox.uncheck(); }
+            else if (field.type === 'dropdown' && value) form.getDropdown(field.name).select(String(value));
+            else if (field.type === 'radio' && value) form.getRadioGroup(field.name).select(String(value));
+          }
+          form.flatten();
+          saveBlob(await doc.save(), 'shrinkpdf-filled-form.pdf');
+          setMessage('Filled PDF download ho gaya.');
+        }
       } else if (mode === 'repair') {
         const f = files[0]; const doc = await PDFDocument.load(await f.arrayBuffer(), {ignoreEncryption:false});
         saveBlob(await doc.save(), 'shrinkpdf-repaired.pdf'); setMessage('PDF re-saved. Severe corruption repair nahi ho sakta.');
@@ -662,21 +727,24 @@ function ExtraPdfTools() {
     } catch (e) { setMessage(e?.message || 'File process nahi ho saki.'); }
     finally { setBusy(false); }
   };
-  const modes = [ ['merge','Merge PDF'], ['split','Split PDF'], ['jpg','JPG to PDF'], ['rotate','Rotate PDF'], ['number','Page Numbers'], ['watermark','Watermark'], ['signature','Add Signature'], ['extract','PDF to Text'], ['pdfjpg','PDF to JPG'], ['ocr','OCR Scanned PDF'], ['docx','PDF to Word'], ['excel','PDF to Excel'], ['repair','Re-save PDF'] ];
+  const modes = [ ['merge','Merge PDF'], ['split','Split PDF'], ['jpg','JPG to PDF'], ['rotate','Rotate PDF'], ['number','Page Numbers'], ['watermark','Watermark'], ['signature','Add Signature'], ['extract','PDF to Text'], ['pdfjpg','PDF to JPG'], ['ocr','OCR Scanned PDF'], ['docx','PDF to Word'], ['excel','PDF to Excel'], ['forms','Fill PDF Form'], ['delete','Delete Pages'], ['reorder','Reorder Pages'], ['metadata','Edit Metadata'], ['repair','Re-save PDF'] ];
   return <section className="py-14 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800" aria-labelledby="more-pdf-tools">
     <div className="max-w-5xl mx-auto px-4 sm:px-6">
-      <div className="text-center mb-8"><h2 id="more-pdf-tools" className="text-2xl sm:text-3xl font-extrabold mb-2 text-slate-900 dark:text-white">More Free PDF Tools</h2><p className="text-sm text-slate-600 dark:text-slate-400">Merge, split, convert images, rotate pages, add signatures, extract text, convert PDF pages to JPG, OCR scanned pages, export text to Word/Excel, page numbers or watermarks in your browser.</p></div>
+      <div className="text-center mb-8"><h2 id="more-pdf-tools" className="text-2xl sm:text-3xl font-extrabold mb-2 text-slate-900 dark:text-white">More Free PDF Tools</h2><p className="text-sm text-slate-600 dark:text-slate-400">Merge, split, delete or reorder pages, edit PDF metadata, convert images, rotate pages, add signatures, extract text, convert PDF pages to JPG, OCR scanned pages, export text to Word/Excel, page numbers or watermarks in your browser.</p></div>
       <div className="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 sm:p-7 bg-slate-50 dark:bg-slate-900">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-5">{modes.map(([id,label])=><button key={id} onClick={()=>{setMode(id);setFiles([]);setMessage('');if(inputRef.current)inputRef.current.value='';}} className={`rounded-xl px-3 py-3 text-sm font-bold border ${mode===id?'bg-blue-600 text-white border-blue-600':'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700'}`}>{label}</button>)}</div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-5">{modes.map(([id,label])=><button key={id} onClick={()=>{setMode(id);setFiles([]);setFormFields([]);setFormValues({});setMessage('');if(inputRef.current)inputRef.current.value='';}} className={`rounded-xl px-3 py-3 text-sm font-bold border ${mode===id?'bg-blue-600 text-white border-blue-600':'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700'}`}>{label}</button>)}</div>
         <label className="block text-sm font-semibold mb-2 text-slate-800 dark:text-slate-200">{mode==='jpg'?'Select JPG/PNG images':mode==='merge'?'Select 2 or more PDF files':'Select PDF file'}</label>
         <input ref={inputRef} type="file" multiple={mode==='merge'||mode==='jpg'} accept={mode==='jpg'?'image/jpeg,image/png':'.pdf,application/pdf'} onChange={e=>setFiles(Array.from(e.target.files||[]))} className="block w-full text-sm text-slate-600 dark:text-slate-300 file:mr-3 file:rounded-lg file:border-0 file:bg-blue-100 file:px-4 file:py-2 file:font-semibold file:text-blue-700" />
-        {mode==='split'&&<div className="mt-4"><label className="block text-sm font-semibold mb-1 text-slate-800 dark:text-slate-200">Page numbers / ranges (example: 1, 3-5)</label><input value={range} onChange={e=>setRange(e.target.value)} className="w-full sm:max-w-xs rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2" /></div>}
+        {(mode==='split'||mode==='delete')&&<div className="mt-4"><label className="block text-sm font-semibold mb-1 text-slate-800 dark:text-slate-200">{mode==='delete'?'Pages to delete':'Page numbers / ranges'} (example: 1, 3-5)</label><input value={range} onChange={e=>setRange(e.target.value)} className="w-full sm:max-w-xs rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2" /></div>}
+        {mode==='reorder'&&<div className="mt-4"><label className="block text-sm font-semibold mb-1 text-slate-800 dark:text-slate-200">New page order (comma separated, e.g. 3,1,2)</label><input value={pageOrder} onChange={e=>setPageOrder(e.target.value)} className="w-full sm:max-w-md rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2" /></div>}
+        {mode==='metadata'&&<div className="mt-4 grid gap-3 sm:grid-cols-2"><label className="block text-sm">Title<input value={metaTitle} onChange={e=>setMetaTitle(e.target.value)} placeholder="Document title" className="mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2" /></label><label className="block text-sm">Author<input value={metaAuthor} onChange={e=>setMetaAuthor(e.target.value)} placeholder="Author name" className="mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2" /></label><label className="block text-sm">Subject<input value={metaSubject} onChange={e=>setMetaSubject(e.target.value)} placeholder="Document subject" className="mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2" /></label><p className="text-xs text-slate-500 self-end">Blank fields keep existing metadata.</p></div>}
         {mode==='watermark'&&<div className="mt-4"><label className="block text-sm font-semibold mb-1 text-slate-800 dark:text-slate-200">Watermark text</label><input value={watermark} onChange={e=>setWatermark(e.target.value)} maxLength={80} className="w-full sm:max-w-md rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2" /></div>}
         {mode==='signature'&&<div className="mt-4"><label className="block text-sm font-semibold mb-1 text-slate-800 dark:text-slate-200">Signature text (first page)</label><input value={signature} onChange={e=>setSignature(e.target.value)} maxLength={60} className="w-full sm:max-w-md rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2" /></div>}
+        {mode==='forms'&&formFields.length>0&&<div className="mt-4 space-y-3 rounded-xl border border-slate-200 dark:border-slate-700 p-4"><p className="text-sm font-semibold">Detected form fields</p>{formFields.map(field=><label key={field.name} className="block text-sm"><span className="mb-1 block font-medium">{field.name}</span>{field.type==='checkbox'?<input type="checkbox" checked={!!formValues[field.name]} onChange={e=>setFormValues(v=>({...v,[field.name]:e.target.checked}))} />:field.type==='dropdown'||field.type==='radio'?<select value={formValues[field.name]||''} onChange={e=>setFormValues(v=>({...v,[field.name]:e.target.value}))} className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2"><option value="">Select...</option>{field.options.map(option=><option key={option} value={option}>{option}</option>)}</select>:field.type==='text'?<input value={formValues[field.name]||''} onChange={e=>setFormValues(v=>({...v,[field.name]:e.target.value}))} className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2" />:<span className="text-xs text-amber-600">Unsupported field type</span>}</label>)}</div>}
         {files.length>0&&<p className="text-xs text-slate-500 mt-3">{files.length} file(s) selected</p>}
-        <button disabled={busy||!files.length} onClick={run} className="mt-5 w-full sm:w-auto rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3 font-bold text-white disabled:opacity-50">{busy?'Processing...':mode==='merge'?'Merge PDF':mode==='split'?'Split PDF':mode==='jpg'?'Convert to PDF':mode==='signature'?'Add Signature':mode==='extract'?'Extract Text':mode==='ocr'?'Run OCR':mode==='pdfjpg'?'Convert to JPG':mode==='docx'?'Convert to Word':mode==='excel'?'Convert to Excel':mode==='repair'?'Re-save PDF':mode==='rotate'?'Rotate PDF':mode==='number'?'Add Page Numbers':'Add Watermark'}</button>
+        <button disabled={busy||!files.length} onClick={run} className="mt-5 w-full sm:w-auto rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3 font-bold text-white disabled:opacity-50">{busy?'Processing...':mode==='merge'?'Merge PDF':mode==='split'?'Split PDF':mode==='jpg'?'Convert to PDF':mode==='signature'?'Add Signature':mode==='extract'?'Extract Text':mode==='ocr'?'Run OCR':mode==='pdfjpg'?'Convert to JPG':mode==='docx'?'Convert to Word':mode==='excel'?'Convert to Excel':mode==='repair'?'Re-save PDF':mode==='delete'?'Delete Pages':mode==='reorder'?'Reorder Pages':mode==='metadata'?'Update Metadata':mode==='forms'?(formFields.length?'Fill & Download PDF':'Detect Form Fields'):mode==='rotate'?'Rotate PDF':mode==='number'?'Add Page Numbers':'Add Watermark'}</button>
         {message&&<p role="status" className="mt-4 text-sm font-medium text-slate-700 dark:text-slate-200">{message}</p>}
-        <p className="mt-4 text-xs text-slate-500 dark:text-slate-400">Processing is performed in your browser. Files are not uploaded by these tools. Typed signature is not a certified e-signature. OCR uses English recognition and may make mistakes. Word/Excel exports extract text and do not preserve the exact PDF layout or tables. Re-save is not full corruption repair. Files are processed in your browser.</p>
+        <p className="mt-4 text-xs text-slate-500 dark:text-slate-400">Processing is performed in your browser. Files are not uploaded by these tools. Typed signature is not a certified e-signature. Page reorder requires every page number exactly once. Metadata fields left blank remain unchanged. OCR uses English recognition and may make mistakes. Word/Excel exports extract text and do not preserve the exact PDF layout or tables. Fill PDF Form works only with existing interactive form fields. Re-save is not full corruption repair. Files are processed in your browser.</p>
       </div>
     </div>
   </section>;

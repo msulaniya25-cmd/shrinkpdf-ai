@@ -591,6 +591,70 @@ function ExtraPdfTools() {
         if (!text.replace(/--- Page \d+ ---/g, '').trim()) throw new Error('Is PDF mein selectable text nahi mila. Scanned PDF ke liye OCR engine chahiye.');
         saveBlob(new TextEncoder().encode(text), 'shrinkpdf-extracted-text.txt', 'text/plain;charset=utf-8');
         setMessage('PDF ka text TXT file mein download ho gaya.');
+      } else if (mode === 'ocr' || mode === 'docx' || mode === 'excel') {
+        const f = files[0]; if (!/\.pdf$/i.test(f.name)) throw new Error('PDF file select karein.');
+        const { pdfjsLib } = await ensurePdfLibraries();
+        const pdf = await pdfjsLib.getDocument({ data: await f.arrayBuffer() }).promise;
+        let pageTexts = [];
+        if (mode === 'ocr') {
+          const tesseract = await loadExternalScript('https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js', 'Tesseract');
+          const worker = await tesseract.createWorker('eng');
+          try {
+            for (let i = 1; i <= pdf.numPages; i++) {
+              setMessage(`OCR processing: page ${i}/${pdf.numPages}...`);
+              const page = await pdf.getPage(i); const viewport = page.getViewport({ scale: 1.6 });
+              const canvas = document.createElement('canvas'); canvas.width = Math.ceil(viewport.width); canvas.height = Math.ceil(viewport.height);
+              await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+              const result = await worker.recognize(canvas);
+              pageTexts.push(`--- Page ${i} ---\n${result.data.text || ''}`);
+              canvas.width = 0; canvas.height = 0;
+            }
+          } finally { await worker.terminate(); }
+        } else {
+          for (let i = 1; i <= pdf.numPages; i++) {
+            const page = await pdf.getPage(i); const content = await page.getTextContent();
+            pageTexts.push(`--- Page ${i} ---\n` + content.items.map(item => item.str).join(' '));
+          }
+          if (!pageTexts.join(' ').replace(/--- Page \d+ ---/g, '').trim()) throw new Error('Selectable text nahi mila. Scanned PDF ke liye OCR option use karein.');
+        }
+        const fullText = pageTexts.join('\n\n');
+        if (mode === 'ocr') {
+          saveBlob(new TextEncoder().encode(fullText), 'shrinkpdf-ocr-text.txt', 'text/plain;charset=utf-8');
+          setMessage('OCR text download ho gaya. English OCR selected hai; handwriting ya complex layouts mein errors ho sakte hain.');
+        } else if (mode === 'docx') {
+          const docxLib = await loadExternalScript('https://unpkg.com/docx@8.5.0/build/index.umd.js', 'docx');
+          const paragraphs = pageTexts.flatMap(t => t.split('\n').map(line => new docxLib.Paragraph({ text: line })));
+          const documentFile = new docxLib.Document({ sections: [{ children: paragraphs }] });
+          const blob = await docxLib.Packer.toBlob(documentFile);
+          const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'shrinkpdf-converted.docx'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1500);
+          setMessage('Editable text DOCX download ho gaya. Original PDF layout/images exactly preserve nahi honge.');
+        } else {
+          const xlsxLib = await loadExternalScript('https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js', 'XLSX');
+          const rows = [['Page', 'Extracted text'], ...pageTexts.map((t, i) => [i + 1, t.replace(/^--- Page \d+ ---\n/, '')])];
+          const workbook = xlsxLib.utils.book_new(); const sheet = xlsxLib.utils.aoa_to_sheet(rows);
+          xlsxLib.utils.book_append_sheet(workbook, sheet, 'PDF Text');
+          xlsxLib.writeFile(workbook, 'shrinkpdf-converted.xlsx');
+          setMessage('PDF text Excel file mein download ho gaya. Tables ki formatting manually adjust karni pad sakti hai.');
+        }
+      } else if (mode === 'pdfjpg') {
+        const f = files[0]; if (!/\.pdf$/i.test(f.name)) throw new Error('PDF file select karein.');
+        const { pdfjsLib } = await ensurePdfLibraries();
+        const pdf = await pdfjsLib.getDocument({ data: await f.arrayBuffer() }).promise;
+        const JSZip = await loadExternalScript('https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js', 'JSZip');
+        const zip = new JSZip();
+        for (let i = 1; i <= pdf.numPages; i++) {
+          setMessage(`JPG conversion: page ${i}/${pdf.numPages}...`);
+          const page = await pdf.getPage(i); const viewport = page.getViewport({ scale: 1.5 });
+          const canvas = document.createElement('canvas'); canvas.width = Math.ceil(viewport.width); canvas.height = Math.ceil(viewport.height);
+          await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+          const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.88));
+          if (!blob) throw new Error(`Page ${i} image create nahi ho saki.`);
+          zip.file(`page-${String(i).padStart(3, '0')}.jpg`, blob);
+          canvas.width = 0; canvas.height = 0;
+        }
+        const archive = await zip.generateAsync({ type: 'blob' });
+        const url = URL.createObjectURL(archive); const a = document.createElement('a'); a.href = url; a.download = 'shrinkpdf-pages-jpg.zip'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1500);
+        setMessage('PDF ke sabhi pages JPG ZIP mein download ho gaye.');
       } else if (mode === 'repair') {
         const f = files[0]; const doc = await PDFDocument.load(await f.arrayBuffer(), {ignoreEncryption:false});
         saveBlob(await doc.save(), 'shrinkpdf-repaired.pdf'); setMessage('PDF re-saved. Severe corruption repair nahi ho sakta.');
@@ -598,10 +662,10 @@ function ExtraPdfTools() {
     } catch (e) { setMessage(e?.message || 'File process nahi ho saki.'); }
     finally { setBusy(false); }
   };
-  const modes = [ ['merge','Merge PDF'], ['split','Split PDF'], ['jpg','JPG to PDF'], ['rotate','Rotate PDF'], ['number','Page Numbers'], ['watermark','Watermark'], ['signature','Add Signature'], ['extract','PDF to Text'], ['repair','Re-save PDF'] ];
+  const modes = [ ['merge','Merge PDF'], ['split','Split PDF'], ['jpg','JPG to PDF'], ['rotate','Rotate PDF'], ['number','Page Numbers'], ['watermark','Watermark'], ['signature','Add Signature'], ['extract','PDF to Text'], ['pdfjpg','PDF to JPG'], ['ocr','OCR Scanned PDF'], ['docx','PDF to Word'], ['excel','PDF to Excel'], ['repair','Re-save PDF'] ];
   return <section className="py-14 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800" aria-labelledby="more-pdf-tools">
     <div className="max-w-5xl mx-auto px-4 sm:px-6">
-      <div className="text-center mb-8"><h2 id="more-pdf-tools" className="text-2xl sm:text-3xl font-extrabold mb-2 text-slate-900 dark:text-white">More Free PDF Tools</h2><p className="text-sm text-slate-600 dark:text-slate-400">Merge, split, convert images, rotate pages, add signatures, extract selectable text, page numbers or watermarks in your browser.</p></div>
+      <div className="text-center mb-8"><h2 id="more-pdf-tools" className="text-2xl sm:text-3xl font-extrabold mb-2 text-slate-900 dark:text-white">More Free PDF Tools</h2><p className="text-sm text-slate-600 dark:text-slate-400">Merge, split, convert images, rotate pages, add signatures, extract text, convert PDF pages to JPG, OCR scanned pages, export text to Word/Excel, page numbers or watermarks in your browser.</p></div>
       <div className="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 sm:p-7 bg-slate-50 dark:bg-slate-900">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-5">{modes.map(([id,label])=><button key={id} onClick={()=>{setMode(id);setFiles([]);setMessage('');if(inputRef.current)inputRef.current.value='';}} className={`rounded-xl px-3 py-3 text-sm font-bold border ${mode===id?'bg-blue-600 text-white border-blue-600':'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700'}`}>{label}</button>)}</div>
         <label className="block text-sm font-semibold mb-2 text-slate-800 dark:text-slate-200">{mode==='jpg'?'Select JPG/PNG images':mode==='merge'?'Select 2 or more PDF files':'Select PDF file'}</label>
@@ -610,9 +674,9 @@ function ExtraPdfTools() {
         {mode==='watermark'&&<div className="mt-4"><label className="block text-sm font-semibold mb-1 text-slate-800 dark:text-slate-200">Watermark text</label><input value={watermark} onChange={e=>setWatermark(e.target.value)} maxLength={80} className="w-full sm:max-w-md rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2" /></div>}
         {mode==='signature'&&<div className="mt-4"><label className="block text-sm font-semibold mb-1 text-slate-800 dark:text-slate-200">Signature text (first page)</label><input value={signature} onChange={e=>setSignature(e.target.value)} maxLength={60} className="w-full sm:max-w-md rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2" /></div>}
         {files.length>0&&<p className="text-xs text-slate-500 mt-3">{files.length} file(s) selected</p>}
-        <button disabled={busy||!files.length} onClick={run} className="mt-5 w-full sm:w-auto rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3 font-bold text-white disabled:opacity-50">{busy?'Processing...':mode==='merge'?'Merge PDF':mode==='split'?'Split PDF':mode==='jpg'?'Convert to PDF':mode==='signature'?'Add Signature':mode==='extract'?'Extract Text':mode==='repair'?'Re-save PDF':mode==='rotate'?'Rotate PDF':mode==='number'?'Add Page Numbers':'Add Watermark'}</button>
+        <button disabled={busy||!files.length} onClick={run} className="mt-5 w-full sm:w-auto rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3 font-bold text-white disabled:opacity-50">{busy?'Processing...':mode==='merge'?'Merge PDF':mode==='split'?'Split PDF':mode==='jpg'?'Convert to PDF':mode==='signature'?'Add Signature':mode==='extract'?'Extract Text':mode==='ocr'?'Run OCR':mode==='pdfjpg'?'Convert to JPG':mode==='docx'?'Convert to Word':mode==='excel'?'Convert to Excel':mode==='repair'?'Re-save PDF':mode==='rotate'?'Rotate PDF':mode==='number'?'Add Page Numbers':'Add Watermark'}</button>
         {message&&<p role="status" className="mt-4 text-sm font-medium text-slate-700 dark:text-slate-200">{message}</p>}
-        <p className="mt-4 text-xs text-slate-500 dark:text-slate-400">Processing is performed in your browser. Files are not uploaded by these tools. Typed signature is not a certified e-signature. Text extraction does not OCR scanned pages. Re-save is not full corruption repair. Files are processed in your browser.</p>
+        <p className="mt-4 text-xs text-slate-500 dark:text-slate-400">Processing is performed in your browser. Files are not uploaded by these tools. Typed signature is not a certified e-signature. OCR uses English recognition and may make mistakes. Word/Excel exports extract text and do not preserve the exact PDF layout or tables. Re-save is not full corruption repair. Files are processed in your browser.</p>
       </div>
     </div>
   </section>;

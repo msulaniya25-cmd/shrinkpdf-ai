@@ -18,15 +18,15 @@ const SEO_PAGES = [
     label: 'Home',
     targetSizeKB: null,
     preset: 'recommended',
-    metaTitle: 'Free PDF Compressor Online – Compress PDF to 50KB, 100KB, 200KB, 500KB & 1MB',
+    metaTitle: 'Free PDF Compressor – Reduce PDF to 50KB, 100KB, 200KB',
     metaDescription: 'Use this free PDF compressor online to reduce PDF file size to 50KB, 100KB, 200KB, 300KB, 500KB, 1MB or 2MB. Compress PDF files in your browser and download in seconds.',
-    h1: 'Free Online PDF Compressor – Compress PDF to 50KB, 100KB, 200KB, 500KB & 1MB',
+    h1: 'Free PDF Compressor – Compress PDF to 50KB, 100KB, 200KB or 1MB',
     subtitle: 'Compress PDF files online for free. Reduce PDF file size to 50KB, 100KB, 200KB, 300KB, 500KB, 1MB or 2MB without unnecessary complexity. Upload your PDF and download the compressed file in seconds.',
     focusKeyword: 'free pdf compressor online',
-    badge: 'AI-Powered Iterative Engine',
+    badge: 'Free Online PDF Compressor',
     useCaseTitle: 'Why Choose ShrinkPDF AI Over Traditional Tools?',
     useCaseIntro: 'Whether you are submitting government portal forms, emailing large portfolios, or archiving invoices, our adaptive compression engine balances DPI resolution and JPEG chroma subsampling to hit exact KB thresholds.',
-    limitations: 'PDF documents containing pure vector text compress dramatically with zero visual loss. Scanned multi-page documents with high-resolution photos may reach a physical minimum floor where further compression would render text illegible—our engine automatically detects this floor and delivers the closest crisp result.',
+    limitations: 'This tool converts each page into an optimized image, so image-heavy scans shrink the most, while small text-only PDFs may already be tiny and can stay unchanged. Scanned multi-page documents with high-resolution photos may reach a physical minimum floor where further compression would render text illegible—our engine automatically detects this floor and delivers the closest crisp result.',
     faqs: [
       {
         q: 'How do I compress a PDF file online for free?',
@@ -34,7 +34,7 @@ const SEO_PAGES = [
       },
       {
         q: 'Is my PDF data secure during compression?',
-        a: 'Yes. All PDF processing happens directly inside your browser sandbox using isolated WebAssembly/Canvas rendering pipelines. Your files are never permanently stored on external servers.'
+        a: 'Yes. All PDF processing happens directly inside your browser sandbox using your browser’s Canvas rendering. Compression never uploads your PDF to our servers. (Only the optional Quick Summary tool sends extracted text to an AI service.)'
       },
       {
         q: 'How does ShrinkPDF AI compare to Adobe PDF Compressor?',
@@ -286,6 +286,134 @@ const SEO_PAGES = [
     ]
   },
   {
+    slug: 'compress-pdf-for-job-application',
+    path: '/compress-pdf-for-job-application',
+    label: 'PDF for Job Applications',
+    targetSizeKB: 100,
+    preset: '100',
+    metaTitle: 'Compress PDF for Job Application Online – Shrink Resume & Documents',
+    metaDescription: 'Reduce a resume, certificate or job application PDF for online form upload limits. Choose a target size and check the result before submitting.',
+    h1: 'Compress PDF for Job Applications and Resume Uploads',
+    subtitle: 'Prepare resumes, certificates and supporting documents for recruitment websites with a practical PDF size target.',
+    focusKeyword: 'compress pdf for job application',
+    badge: 'Job Application PDF Guide',
+    useCaseTitle: 'Make Recruitment Document Uploads Easier',
+    useCaseIntro: 'Recruitment forms may set different file-size limits for resumes, certificates and identity documents. Use the 100KB preset as a starting point for a small document, or choose a larger target when the PDF contains several pages, stamps or photographs. Always follow the limit shown by the employer portal.',
+    limitations: 'A multi-page scanned certificate may not remain readable at 100KB. Open the compressed PDF and check names, dates, signatures and document numbers before uploading it.',
+    faqs: [
+      { q: 'How can I reduce my resume PDF for an online job form?', a: 'Choose the 100KB target above, compress the PDF, download the result and open it to verify that the text and contact details remain readable. If the portal allows a larger file, try 200KB or 500KB for better clarity.' },
+      { q: 'What PDF size should I use for a job application?', a: 'Use the maximum size specified by the recruitment portal. There is no single limit for every employer. Select a target at or below that limit and review the output before submitting.' },
+      { q: 'Can I compress certificates and mark sheets together?', a: 'Yes, if the portal accepts a combined PDF. Multi-page scans may need a larger target than a one-page resume to keep seals, signatures and small text legible.' }
+    ]
+  },
+  {
+    slug: 'compress-pdf-for-government-forms',
+    path: '/compress-pdf-for-government-forms',
+    label: 'PDF for Government Forms',
+    targetSizeKB: 200,
+    preset: '200',
+    metaTitle: 'Compress PDF for Government Forms – Reduce PDF to Required KB',
+    metaDescription: 'Prepare PDF documents for government and exam application uploads. Reduce file size to a selected KB limit and verify readability before submission.',
+    h1: 'Compress PDF for Government Forms and Online Applications',
+    subtitle: 'Reduce scanned certificates and application documents to fit the file-size limit shown on an online form.',
+    focusKeyword: 'compress pdf for government forms',
+    badge: 'Online Form Upload Guide',
+    useCaseTitle: 'Choose the Correct Size for Each Uploaded Document',
+    useCaseIntro: 'Government, exam and admission forms can specify different limits for a photo, certificate, signature or combined PDF. Check the exact instruction beside the upload field first. Use 50KB or 100KB for a very small one-page file only when the portal asks for it; choose 200KB, 300KB or more when the document needs additional detail.',
+    limitations: 'Do not force a large, multi-page scan into an extremely small target if the printed text becomes difficult to read. The portal’s size limit and the document’s legibility both matter.',
+    faqs: [
+      { q: 'Which PDF size is best for government form uploads?', a: 'Use the exact maximum size mentioned on the form. Requirements vary by department and document type, so do not assume that every form accepts 50KB or 100KB.' },
+      { q: 'Can I compress a scanned certificate to 100KB?', a: 'You can try the 100KB preset. The achieved size depends on page count, scan resolution and image content. Check every page after compression.' },
+      { q: 'Why is my PDF still larger than the selected target?', a: 'A long or image-heavy PDF may have a minimum readable size above the target. Try a larger preset rather than making important text and seals unreadable.' }
+    ]
+  },
+  {
+    slug: 'compress-pdf-for-email',
+    path: '/compress-pdf-for-email',
+    label: 'PDF for Email',
+    targetSizeKB: 1024,
+    preset: '1024',
+    metaTitle: 'Compress PDF for Email – Reduce Large PDF Attachments Online',
+    metaDescription: 'Make a PDF easier to email by reducing its file size in your browser. Choose a target such as 500KB or 1MB and review the compressed file.',
+    h1: 'Compress PDF for Email Attachments',
+    subtitle: 'Reduce large reports, invoices and scanned documents before attaching them to an email.',
+    focusKeyword: 'compress pdf for email',
+    badge: 'Email Attachment Guide',
+    useCaseTitle: 'Create Smaller PDF Attachments',
+    useCaseIntro: 'Large PDF attachments can be slow to upload and may exceed mailbox limits. Choose a target based on the recipient’s attachment limit and leave room for the email message and other files. A 500KB or 1MB target can be a useful starting point for many documents, but the right size depends on the number of pages and images.',
+    limitations: 'Email providers and workplace mail systems have different attachment limits. Compression cannot guarantee delivery; check the recipient’s limit and review the downloaded PDF before sending.',
+    faqs: [
+      { q: 'How do I reduce a PDF before emailing it?', a: 'Upload the PDF, choose a target such as 500KB or 1MB, press Compress PDF and download the result. Attach the downloaded file to your email after checking it opens correctly.' },
+      { q: 'What is a good PDF size for an email attachment?', a: 'There is no universal email attachment size. Aim for a file comfortably below the limit set by your email provider or workplace. Smaller files are generally easier to send.' },
+      { q: 'Will compressing a PDF make it easier to send from a phone?', a: 'A smaller PDF can take less time and mobile data to upload. Processing performance still depends on your phone, browser and the size of the original document.' }
+    ]
+  },
+  {
+    slug: 'reduce-pdf-file-size-online',
+    path: '/reduce-pdf-file-size-online',
+    label: 'Reduce PDF File Size',
+    targetSizeKB: null,
+    preset: 'recommended',
+    metaTitle: 'Reduce PDF File Size Online Free – PDF Size Reducer',
+    metaDescription: 'Learn how to reduce PDF file size online. Compress documents in your browser, compare the output size and download a smaller PDF.',
+    h1: 'Reduce PDF File Size Online',
+    subtitle: 'Use a browser-based PDF size reducer to make documents smaller for sharing, storage and online uploads.',
+    focusKeyword: 'reduce pdf file size online',
+    badge: 'PDF Size Reduction Guide',
+    useCaseTitle: 'A Simple Way to Make PDF Documents Smaller',
+    useCaseIntro: 'PDF size is often increased by high-resolution scans, embedded photographs and other page content. Upload your document, choose Recommended or a target size, then compare the original and compressed file sizes. If the document contains fine print or signatures, prioritize readability over the smallest possible file.',
+    limitations: 'Some text-based PDFs are already optimized and may shrink only slightly. Image-heavy scans can shrink more, but stronger compression can reduce image detail.',
+    faqs: [
+      { q: 'How can I reduce PDF file size without installing software?', a: 'Open this page in a modern browser, select your PDF, choose a compression target and download the processed file. No desktop installation is required.' },
+      { q: 'Why does my PDF not get much smaller?', a: 'The original file may already be optimized, or it may contain mostly text and vector graphics. There may be little removable data without changing the document.' },
+      { q: 'Does a smaller PDF always mean lower quality?', a: 'Not always. Removing unnecessary data may reduce size with little visible change, while reducing image resolution can affect clarity. Review the result before sharing it.' }
+    ]
+  },
+  {
+    slug: 'pdf-size-kam-kaise-kare',
+    path: '/pdf-size-kam-kaise-kare',
+    label: 'PDF Size Kam Kaise Kare (हिंदी)',
+    lang: 'hi',
+    targetSizeKB: null,
+    preset: 'recommended',
+    metaTitle: 'PDF Size Kam Kaise Kare – फ्री PDF Compressor (हिंदी)',
+    metaDescription: 'PDF का साइज़ कम कैसे करें? अपनी PDF को 50KB, 100KB, 200KB या 500KB तक फ्री में छोटा करें। मोबाइल या कंप्यूटर पर, बिना साइन-अप के।',
+    h1: 'PDF Size Kam Kaise Kare – फ्री ऑनलाइन PDF Compressor',
+    subtitle: 'अपनी PDF अपलोड करें, KB साइज़ चुनें और छोटी PDF तुरंत डाउनलोड करें। फॉर्म, रिज़्यूमे, डॉक्यूमेंट और ईमेल के लिए आसान तरीका।',
+    focusKeyword: 'pdf size kam kaise kare',
+    badge: 'हिंदी गाइड',
+    useCaseTitle: 'PDF का साइज़ कम करने का आसान तरीका',
+    useCaseIntro: 'ऑनलाइन फॉर्म, नौकरी के आवेदन या स्कॉलरशिप पोर्टल पर अक्सर PDF की साइज़ लिमिट होती है। ऊपर अपनी PDF चुनें, पोर्टल पर लिखी लिमिट के बराबर या उससे कम साइज़ चुनें और Compress दबाएँ। फिर डाउनलोड की हुई फ़ाइल खोलकर जाँच लें कि नाम, तारीख और सिग्नेचर साफ़ दिख रहे हैं। हमेशा पोर्टल पर दी गई लिमिट को ही सही मानें।',
+    limitations: 'बहुत सारे पेजों वाली स्कैन की हुई PDF को बहुत छोटे साइज़ (जैसे 50KB) में लाने पर लिखावट धुँधली हो सकती है। ऐसे में थोड़ा बड़ा साइज़ चुनें। कंप्रेस की गई फ़ाइल में टेक्स्ट सिलेक्ट या कॉपी नहीं हो पाएगा।',
+    faqs: [
+      { q: 'PDF का साइज़ कम कैसे करें?', a: 'ऊपर बॉक्स में अपनी PDF डालें, 100KB, 200KB जैसा टारगेट साइज़ चुनें और Compress PDF Now दबाएँ। कुछ सेकंड में छोटी PDF डाउनलोड के लिए तैयार हो जाएगी।' },
+      { q: 'क्या मेरी PDF सुरक्षित रहती है?', a: 'कंप्रेशन आपके ब्राउज़र में ही होता है, आपकी PDF हमारे सर्वर पर अपलोड नहीं की जाती। सिर्फ़ वैकल्पिक Quick Summary टूल टेक्स्ट को AI सेवा को भेजता है।' },
+      { q: 'क्या यह मोबाइल पर चलता है?', a: 'हाँ, यह Android और iPhone के ब्राउज़र में चलता है। कोई ऐप इंस्टॉल करने या साइन-अप करने की ज़रूरत नहीं है।' },
+      { q: 'मेरी PDF टारगेट साइज़ से बड़ी क्यों रह गई?', a: 'ज़्यादा पेज वाली या भारी स्कैन वाली PDF को बहुत छोटा करने पर टेक्स्ट पढ़ने लायक नहीं रहता। ऐसे में टूल सबसे छोटा पढ़ने योग्य साइज़ देता है। थोड़ा बड़ा टारगेट चुनकर दोबारा कोशिश करें।' }
+    ]
+  },
+  {
+    slug: 'compress-pdf-for-scholarship-admission',
+    path: '/compress-pdf-for-scholarship-admission',
+    label: 'PDF for Scholarship & Admission',
+    targetSizeKB: 200,
+    preset: '200',
+    metaTitle: 'Compress PDF for Scholarship & College Admission Forms',
+    metaDescription: 'Reduce mark sheets, ID proofs and certificates to the size limit of a scholarship or college admission portal. Free, in your browser, no sign-up.',
+    h1: 'Compress PDF for Scholarship and College Admission Forms',
+    subtitle: 'Shrink mark sheets, income certificates, ID proofs and other documents to fit the upload limit on the portal.',
+    focusKeyword: 'compress pdf for scholarship form',
+    badge: 'Scholarship & Admission Guide',
+    useCaseTitle: 'Fit Every Document Within the Portal Limit',
+    useCaseIntro: 'Scholarship and admission portals often set a different size limit for each document. Read the instruction next to each upload field, choose a target at or below it, and compress each file separately. Start with 200KB for a one-page certificate and go larger if seals or small print look unclear.',
+    limitations: 'Multi-page scans compressed to a very small size can lose fine print. Open the downloaded PDF and check names, numbers, dates and stamps before you upload it.',
+    faqs: [
+      { q: 'What size should I choose for a scholarship form PDF?', a: 'Use the exact limit shown on the portal. Pick a target at or below it, then check the result before uploading.' },
+      { q: 'Can I compress each certificate separately?', a: 'Yes. Compressing each document on its own makes it easier to keep every file within its own limit, and the Merge PDF tool can combine them if the portal wants a single file.' },
+      { q: 'Is it free for students?', a: 'Yes. The compressor is free, needs no sign-up and adds no watermark.' }
+    ]
+  },
+  {
     slug: 'about-us', path: '/about-us', label: 'About Us', isLegal: true,
     metaTitle: 'About Us – ShrinkPDF AI',
     metaDescription: 'Learn about ShrinkPDF AI, a browser-based tool designed to help people compress PDF files quickly and privately.',
@@ -351,7 +479,7 @@ const TARGET_CARDS = [
 const CORE_FEATURES = [
   { icon: Sparkles, title: 'Free PDF Compression', desc: 'Compress unlimited PDF files with zero watermarks, subscriptions, or hidden paywalls.' },
   { icon: Globe, title: 'Online PDF Compressor', desc: 'Works directly in your browser across Windows, macOS, Linux, iOS, and Android.' },
-  { icon: Shield, title: 'Secure PDF Processing', desc: 'Local sandboxed processing ensures sensitive contracts and IDs never leave your device.' },
+  { icon: Shield, title: 'Secure PDF Processing', desc: 'Local sandboxed processing keeps your PDFs on your device while compressing. Only the optional AI Summary sends text to a server.' },
   { icon: Cpu, title: 'No Software Installation', desc: 'Zero heavy desktop apps or browser extensions required—start shrinking files in seconds.' },
   { icon: Zap, title: 'Fast PDF Compression', desc: 'Multi-pass iterative optimization calculates the ideal DPI and compression ratio rapidly.' },
   { icon: Sliders, title: 'Multiple Target File Sizes', desc: 'Choose 50KB, 100KB, 200KB, 300KB, 500KB, 1MB, 2MB, Recommended, or Custom KB.' },
@@ -406,6 +534,305 @@ const formatBytes = (bytes) => {
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))} ${sizes[i]}`;
 };
 
+
+// Additional browser-side PDF utilities. Files stay on the user's device.
+const loadPdfLib = () => new Promise((resolve, reject) => {
+  if (window.PDFLib) return resolve(window.PDFLib);
+  const existing = document.querySelector('script[data-pdflib="1"]');
+  if (existing) { existing.addEventListener('load', () => resolve(window.PDFLib), { once: true }); existing.addEventListener('error', reject, { once: true }); return; }
+  const script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js';
+  script.async = true; script.dataset.pdflib = '1';
+  script.onload = () => resolve(window.PDFLib); script.onerror = reject;
+  document.head.appendChild(script);
+});
+
+function ExtraPdfTools() {
+  const [mode, setMode] = useState('merge');
+  const [files, setFiles] = useState([]);
+  const [range, setRange] = useState('1');
+  const [watermark, setWatermark] = useState('CONFIDENTIAL');
+  const [signature, setSignature] = useState('Your Name');
+  const [pageOrder, setPageOrder] = useState('1,2,3');
+  const [metaTitle, setMetaTitle] = useState('');
+  const [metaAuthor, setMetaAuthor] = useState('');
+  const [metaSubject, setMetaSubject] = useState('');
+  const [cropMargin, setCropMargin] = useState('5');
+  const [formFields, setFormFields] = useState([]);
+  const [formValues, setFormValues] = useState({});
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState('');
+  const inputRef = useRef(null);
+  const saveBlob = (bytes, name, type='application/pdf') => {
+    const url = URL.createObjectURL(new Blob([bytes], { type }));
+    const a = document.createElement('a'); a.href = url; a.download = name; a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+  };
+  const run = async () => {
+    setMessage('');
+    if (!files.length) { setMessage('Pehle file select karein.'); return; }
+    setBusy(true);
+    try {
+      const lib = await loadPdfLib();
+      const { PDFDocument } = lib;
+      if (mode === 'merge') {
+        if (files.length < 2) throw new Error('Merge ke liye kam se kam 2 PDF select karein.');
+        const out = await PDFDocument.create();
+        for (const f of files) {
+          if (!/\.pdf$/i.test(f.name)) throw new Error('Merge mein sirf PDF files select karein.');
+          const doc = await PDFDocument.load(await f.arrayBuffer());
+          const copied = await out.copyPages(doc, doc.getPageIndices()); copied.forEach(page => out.addPage(page));
+        }
+        saveBlob(await out.save(), 'shrinkpdf-merged.pdf');
+        setMessage('Merged PDF download ho gaya.');
+      } else if (mode === 'split') {
+        const f = files[0]; if (!/\.pdf$/i.test(f.name)) throw new Error('PDF file select karein.');
+        const src = await PDFDocument.load(await f.arrayBuffer());
+        const indexes = range.split(',').flatMap(part => {
+          const m = part.trim().match(/^(\d+)(?:\s*-\s*(\d+))?$/); if (!m) return [];
+          const a = Number(m[1]), b = Number(m[2] || m[1]); return Array.from({length: Math.max(0,b-a+1)}, (_,i)=>a+i-1);
+        }).filter(i => i >= 0 && i < src.getPageCount());
+        if (!indexes.length) throw new Error(`Valid page range dein. Is PDF mein ${src.getPageCount()} pages hain.`);
+        const out = await PDFDocument.create(); const copied = await out.copyPages(src, [...new Set(indexes)]); copied.forEach(page=>out.addPage(page));
+        saveBlob(await out.save(), 'shrinkpdf-split.pdf'); setMessage('Selected pages ka PDF download ho gaya.');
+      } else if (mode === 'jpg') {
+        const out = await PDFDocument.create();
+        for (const f of files) {
+          const buf = await f.arrayBuffer(); let img;
+          if (/\.png$/i.test(f.name) || f.type === 'image/png') img = await out.embedPng(buf);
+          else if (/\.(jpe?g)$/i.test(f.name) || f.type === 'image/jpeg') img = await out.embedJpg(buf);
+          else throw new Error('JPG to PDF mein JPG ya PNG images select karein.');
+          const page = out.addPage([img.width, img.height]); page.drawImage(img, {x:0,y:0,width:img.width,height:img.height});
+        }
+        saveBlob(await out.save(), 'images-to-pdf.pdf'); setMessage('PDF download ho gaya.');
+      } else if (mode === 'rotate' || mode === 'number' || mode === 'watermark') {
+        const f = files[0]; if (!/\.pdf$/i.test(f.name)) throw new Error('PDF file select karein.');
+        const doc = await PDFDocument.load(await f.arrayBuffer());
+        if (mode === 'rotate') {
+          doc.getPages().forEach(page => page.setRotation(lib.degrees((page.getRotation().angle + 90) % 360)));
+          saveBlob(await doc.save(), 'shrinkpdf-rotated.pdf'); setMessage('Pages 90° rotate ho gaye.');
+        } else if (mode === 'number') {
+          const font = await doc.embedFont(lib.StandardFonts.Helvetica);
+          doc.getPages().forEach((page, i) => { const { width } = page.getSize(); page.drawText(`${i + 1}`, { x: width - 42, y: 18, size: 10, font, color: lib.rgb(0.35, 0.35, 0.35) }); });
+          saveBlob(await doc.save(), 'shrinkpdf-page-numbers.pdf'); setMessage('Page numbers add ho gaye.');
+        } else {
+          const label = watermark.trim(); if (!label) throw new Error('Watermark text likhein.');
+          const font = await doc.embedFont(lib.StandardFonts.Helvetica);
+          doc.getPages().forEach(page => { const { width, height } = page.getSize(); page.drawText(label.slice(0, 80), { x: 36, y: height / 2, size: Math.min(34, Math.max(18, width / 18)), font, color: lib.rgb(0.72, 0.72, 0.72), opacity: 0.35, rotate: lib.degrees(-35) }); });
+          saveBlob(await doc.save(), 'shrinkpdf-watermarked.pdf'); setMessage('Watermark add ho gaya.');
+        }
+      } else if (mode === 'signature') {
+        const f = files[0]; if (!/\.pdf$/i.test(f.name)) throw new Error('PDF file select karein.');
+        const label = signature.trim(); if (!label) throw new Error('Signature text likhein.');
+        const doc = await PDFDocument.load(await f.arrayBuffer());
+        const font = await doc.embedFont(lib.StandardFonts.TimesRomanItalic);
+        const page = doc.getPages()[0]; const { width } = page.getSize();
+        page.drawText(label.slice(0, 60), { x: 48, y: 48, size: 22, font, color: lib.rgb(0.08, 0.18, 0.42) });
+        saveBlob(await doc.save(), 'shrinkpdf-signed.pdf'); setMessage('Typed signature first page ke bottom par add ho gaya.');
+      } else if (mode === 'extract') {
+        const f = files[0]; if (!/\.pdf$/i.test(f.name)) throw new Error('PDF file select karein.');
+        const { pdfjsLib } = await ensurePdfLibraries();
+        const pdf = await pdfjsLib.getDocument({ data: await f.arrayBuffer() }).promise;
+        const chunks = [];
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i); const content = await page.getTextContent();
+          chunks.push(`\n--- Page ${i} ---\n` + content.items.map(item => item.str).join(' '));
+        }
+        const text = chunks.join('\n');
+        if (!text.replace(/--- Page \d+ ---/g, '').trim()) throw new Error('Is PDF mein selectable text nahi mila. Scanned PDF ke liye OCR engine chahiye.');
+        saveBlob(new TextEncoder().encode(text), 'shrinkpdf-extracted-text.txt', 'text/plain;charset=utf-8');
+        setMessage('PDF ka text TXT file mein download ho gaya.');
+      } else if (mode === 'ocr' || mode === 'docx' || mode === 'excel') {
+        const f = files[0]; if (!/\.pdf$/i.test(f.name)) throw new Error('PDF file select karein.');
+        const { pdfjsLib } = await ensurePdfLibraries();
+        const pdf = await pdfjsLib.getDocument({ data: await f.arrayBuffer() }).promise;
+        let pageTexts = [];
+        if (mode === 'ocr') {
+          const tesseract = await loadExternalScript('https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js', 'Tesseract');
+          const worker = await tesseract.createWorker('eng');
+          try {
+            for (let i = 1; i <= pdf.numPages; i++) {
+              setMessage(`OCR processing: page ${i}/${pdf.numPages}...`);
+              const page = await pdf.getPage(i); const viewport = page.getViewport({ scale: 1.6 });
+              const canvas = document.createElement('canvas'); canvas.width = Math.ceil(viewport.width); canvas.height = Math.ceil(viewport.height);
+              await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+              const result = await worker.recognize(canvas);
+              pageTexts.push(`--- Page ${i} ---\n${result.data.text || ''}`);
+              canvas.width = 0; canvas.height = 0;
+            }
+          } finally { await worker.terminate(); }
+        } else {
+          for (let i = 1; i <= pdf.numPages; i++) {
+            const page = await pdf.getPage(i); const content = await page.getTextContent();
+            pageTexts.push(`--- Page ${i} ---\n` + content.items.map(item => item.str).join(' '));
+          }
+          if (!pageTexts.join(' ').replace(/--- Page \d+ ---/g, '').trim()) throw new Error('Selectable text nahi mila. Scanned PDF ke liye OCR option use karein.');
+        }
+        const fullText = pageTexts.join('\n\n');
+        if (mode === 'ocr') {
+          saveBlob(new TextEncoder().encode(fullText), 'shrinkpdf-ocr-text.txt', 'text/plain;charset=utf-8');
+          setMessage('OCR text download ho gaya. English OCR selected hai; handwriting ya complex layouts mein errors ho sakte hain.');
+        } else if (mode === 'docx') {
+          const docxLib = await loadExternalScript('https://unpkg.com/docx@8.5.0/build/index.umd.js', 'docx');
+          const paragraphs = pageTexts.flatMap(t => t.split('\n').map(line => new docxLib.Paragraph({ text: line })));
+          const documentFile = new docxLib.Document({ sections: [{ children: paragraphs }] });
+          const blob = await docxLib.Packer.toBlob(documentFile);
+          const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'shrinkpdf-converted.docx'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1500);
+          setMessage('Editable text DOCX download ho gaya. Original PDF layout/images exactly preserve nahi honge.');
+        } else {
+          const xlsxLib = await loadExternalScript('https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js', 'XLSX');
+          const rows = [['Page', 'Extracted text'], ...pageTexts.map((t, i) => [i + 1, t.replace(/^--- Page \d+ ---\n/, '')])];
+          const workbook = xlsxLib.utils.book_new(); const sheet = xlsxLib.utils.aoa_to_sheet(rows);
+          xlsxLib.utils.book_append_sheet(workbook, sheet, 'PDF Text');
+          xlsxLib.writeFile(workbook, 'shrinkpdf-converted.xlsx');
+          setMessage('PDF text Excel file mein download ho gaya. Tables ki formatting manually adjust karni pad sakti hai.');
+        }
+      } else if (mode === 'pdfjpg') {
+        const f = files[0]; if (!/\.pdf$/i.test(f.name)) throw new Error('PDF file select karein.');
+        const { pdfjsLib } = await ensurePdfLibraries();
+        const pdf = await pdfjsLib.getDocument({ data: await f.arrayBuffer() }).promise;
+        const JSZip = await loadExternalScript('https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js', 'JSZip');
+        const zip = new JSZip();
+        for (let i = 1; i <= pdf.numPages; i++) {
+          setMessage(`JPG conversion: page ${i}/${pdf.numPages}...`);
+          const page = await pdf.getPage(i); const viewport = page.getViewport({ scale: 1.5 });
+          const canvas = document.createElement('canvas'); canvas.width = Math.ceil(viewport.width); canvas.height = Math.ceil(viewport.height);
+          await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+          const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.88));
+          if (!blob) throw new Error(`Page ${i} image create nahi ho saki.`);
+          zip.file(`page-${String(i).padStart(3, '0')}.jpg`, blob);
+          canvas.width = 0; canvas.height = 0;
+        }
+        const archive = await zip.generateAsync({ type: 'blob' });
+        const url = URL.createObjectURL(archive); const a = document.createElement('a'); a.href = url; a.download = 'shrinkpdf-pages-jpg.zip'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1500);
+        setMessage('PDF ke sabhi pages JPG ZIP mein download ho gaye.');
+      } else if (mode === 'delete' || mode === 'reorder' || mode === 'metadata') {
+        const f = files[0]; if (!/\.pdf$/i.test(f.name)) throw new Error('PDF file select karein.');
+        const doc = await PDFDocument.load(await f.arrayBuffer());
+        if (mode === 'delete') {
+          const pageCount = doc.getPageCount();
+          const indexes = range.split(',').flatMap(part => {
+            const m = part.trim().match(/^(\d+)(?:\s*-\s*(\d+))?$/); if (!m) return [];
+            const a = Number(m[1]), b = Number(m[2] || m[1]);
+            return Array.from({ length: Math.max(0, b - a + 1) }, (_, i) => a + i - 1);
+          });
+          const unique = [...new Set(indexes)].filter(i => i >= 0 && i < pageCount).sort((a,b) => b-a);
+          if (!unique.length) throw new Error(`Delete karne ke liye valid page numbers dein. Is PDF mein ${pageCount} pages hain.`);
+          if (unique.length === pageCount) throw new Error('Saare pages delete nahi kar sakte. Kam se kam ek page rehna chahiye.');
+          unique.forEach(i => doc.removePage(i));
+          saveBlob(await doc.save(), 'shrinkpdf-pages-deleted.pdf');
+          setMessage(`${unique.length} page(s) delete ho gaye.`);
+        } else if (mode === 'reorder') {
+          const count = doc.getPageCount();
+          const order = pageOrder.split(',').map(v => Number(v.trim()));
+          if (order.length !== count || order.some(n => !Number.isInteger(n) || n < 1 || n > count) || new Set(order).size !== count) {
+            throw new Error(`Page order mein 1 se ${count} tak har page number ek baar likhein. Example: ${Array.from({length:count}, (_,i)=>i+1).join(',')}`);
+          }
+          const out = await PDFDocument.create();
+          const copied = await out.copyPages(doc, order.map(n => n - 1)); copied.forEach(page => out.addPage(page));
+          saveBlob(await out.save(), 'shrinkpdf-reordered.pdf');
+          setMessage('PDF pages naye order mein download ho gaye.');
+        } else {
+          if (metaTitle.trim()) doc.setTitle(metaTitle.trim());
+          if (metaAuthor.trim()) doc.setAuthor(metaAuthor.trim());
+          if (metaSubject.trim()) doc.setSubject(metaSubject.trim());
+          doc.setModificationDate(new Date());
+          saveBlob(await doc.save(), 'shrinkpdf-metadata-updated.pdf');
+          setMessage('PDF metadata update karke download kar diya.');
+        }
+      } else if (mode === 'forms') {
+        const f = files[0]; if (!/\.pdf$/i.test(f.name)) throw new Error('PDF file select karein.');
+        const doc = await PDFDocument.load(await f.arrayBuffer());
+        const form = doc.getForm();
+        const fields = form.getFields().map(field => {
+          const type = field.constructor.name;
+          return { name: field.getName(), type: type.includes('CheckBox') ? 'checkbox' : type.includes('Dropdown') ? 'dropdown' : type.includes('RadioGroup') ? 'radio' : type.includes('OptionList') ? 'options' : type.includes('TextField') ? 'text' : 'unsupported', options: type.includes('Dropdown') || type.includes('RadioGroup') || type.includes('OptionList') ? (field.getOptions?.() || []) : [] };
+        });
+        if (!formFields.length) {
+          if (!fields.length) throw new Error('Is PDF mein fillable form fields nahi mile. Yeh tool sirf existing interactive PDF fields bhar sakta hai.');
+          setFormFields(fields);
+          setFormValues(Object.fromEntries(fields.map(field => [field.name, field.type === 'checkbox' ? false : ''])));
+          setMessage(`${fields.length} form fields mile. Neeche values bharein, phir Fill & Download dabayein.`);
+        } else {
+          for (const field of fields) {
+            const value = formValues[field.name];
+            if (field.type === 'text' && value !== undefined) form.getTextField(field.name).setText(String(value));
+            else if (field.type === 'checkbox') { const checkbox = form.getCheckBox(field.name); value ? checkbox.check() : checkbox.uncheck(); }
+            else if (field.type === 'dropdown' && value) form.getDropdown(field.name).select(String(value));
+            else if (field.type === 'radio' && value) form.getRadioGroup(field.name).select(String(value));
+          }
+          form.flatten();
+          saveBlob(await doc.save(), 'shrinkpdf-filled-form.pdf');
+          setMessage('Filled PDF download ho gaya.');
+        }
+      } else if (mode === 'crop') {
+        const f = files[0]; if (!/\.pdf$/i.test(f.name)) throw new Error('PDF file select karein.');
+        const margin = Number(cropMargin);
+        if (!Number.isFinite(margin) || margin < 0 || margin > 40) throw new Error('Crop margin 0 se 40 percent ke beech rakhein.');
+        const doc = await PDFDocument.load(await f.arrayBuffer());
+        doc.getPages().forEach(page => {
+          const { width, height } = page.getSize();
+          const mx = width * margin / 100, my = height * margin / 100;
+          page.setCropBox(mx, my, Math.max(1, width - 2 * mx), Math.max(1, height - 2 * my));
+        });
+        saveBlob(await doc.save(), 'shrinkpdf-cropped.pdf'); setMessage('Crop margins apply karke PDF download ho gaya.');
+      } else if (mode === 'summary') {
+        const f = files[0]; if (!/\.pdf$/i.test(f.name)) throw new Error('PDF file select karein.');
+        const { pdfjsLib } = await ensurePdfLibraries();
+        const pdf = await pdfjsLib.getDocument({ data: await f.arrayBuffer() }).promise;
+        const pageTexts = [];
+        for (let i = 1; i <= pdf.numPages; i++) {
+          setMessage(`PDF text read ho raha hai: page ${i}/${pdf.numPages}...`);
+          const page = await pdf.getPage(i); const content = await page.getTextContent();
+          pageTexts.push(content.items.map(item => item.str).join(' '));
+        }
+        const fullText = pageTexts.join('\n').replace(/[ \t]+/g, ' ').trim();
+        if (!fullText) throw new Error('PDF mein selectable text nahi mila. Scanned PDF ke liye pehle OCR karein.');
+        if (fullText.length > 50000) throw new Error('PDF ka text 50,000 characters se zyada hai. Chhoti PDF ya kam pages wali PDF use karein.');
+        setMessage('Gemini AI summary bana raha hai. Kripya intezar karein...');
+        const response = await fetch('/api/summarize', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: fullText })
+        });
+        let result = {};
+        try { result = await response.json(); } catch (_) { result = {}; }
+        if (!response.ok) throw new Error(result.error || result.details || `AI summary request fail hua (HTTP ${response.status}).`);
+        if (!result.summary) throw new Error('Gemini se summary nahi mili. Dobara koshish karein.');
+        const summaryText = `SHRINKPDF AI — PDF SUMMARY\n\n${result.summary}\n\nGenerated with Gemini AI. Please verify important details against the original PDF.`;
+        saveBlob(new TextEncoder().encode(summaryText), 'shrinkpdf-ai-summary.txt', 'text/plain;charset=utf-8');
+        setMessage('Gemini AI summary taiyar hai aur TXT file download ho gayi.');
+      } else if (mode === 'repair') {
+        const f = files[0]; const doc = await PDFDocument.load(await f.arrayBuffer(), {ignoreEncryption:false});
+        saveBlob(await doc.save(), 'shrinkpdf-repaired.pdf'); setMessage('PDF re-saved. Severe corruption repair nahi ho sakta.');
+      }
+    } catch (e) { setMessage(e?.message || 'File process nahi ho saki.'); }
+    finally { setBusy(false); }
+  };
+  const modes = [ ['merge','Merge PDF'], ['split','Split PDF'], ['jpg','JPG to PDF'], ['rotate','Rotate PDF'], ['number','Page Numbers'], ['watermark','Watermark'], ['signature','Add Signature'], ['extract','PDF to Text'], ['pdfjpg','PDF to JPG'], ['ocr','OCR Scanned PDF'], ['docx','PDF to Word'], ['excel','PDF to Excel'], ['forms','Fill PDF Form'], ['delete','Delete Pages'], ['reorder','Reorder Pages'], ['metadata','Edit Metadata'], ['crop','Crop PDF'], ['summary','Quick Summary'], ['repair','Re-save PDF'] ];
+  return <section className="py-14 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800" aria-labelledby="more-pdf-tools">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6">
+      <div className="text-center mb-8"><h2 id="more-pdf-tools" className="text-2xl sm:text-3xl font-extrabold mb-2 text-slate-900 dark:text-white">More Free PDF Tools</h2><p className="text-sm text-slate-600 dark:text-slate-400">Merge, split, crop, summarize PDFs with Gemini AI, delete or reorder pages, edit PDF metadata, convert images, rotate pages, add typed signatures, extract text, convert PDF pages to JPG, OCR scanned pages, export text to Word/Excel, page numbers or watermarks in your browser.</p></div>
+      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 sm:p-7 bg-slate-50 dark:bg-slate-900">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-5">{modes.map(([id,label])=><button key={id} onClick={()=>{setMode(id);setFiles([]);setFormFields([]);setFormValues({});setMessage('');if(inputRef.current)inputRef.current.value='';}} className={`rounded-xl px-3 py-3 text-sm font-bold border ${mode===id?'bg-blue-600 text-white border-blue-600':'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700'}`}>{label}</button>)}</div>
+        <label className="block text-sm font-semibold mb-2 text-slate-800 dark:text-slate-200">{mode==='jpg'?'Select JPG/PNG images':mode==='merge'?'Select 2 or more PDF files':'Select PDF file'}</label>
+        <input ref={inputRef} type="file" multiple={mode==='merge'||mode==='jpg'} accept={mode==='jpg'?'image/jpeg,image/png':'.pdf,application/pdf'} onChange={e=>setFiles(Array.from(e.target.files||[]))} className="block w-full text-sm text-slate-600 dark:text-slate-300 file:mr-3 file:rounded-lg file:border-0 file:bg-blue-100 file:px-4 file:py-2 file:font-semibold file:text-blue-700" />
+        {(mode==='split'||mode==='delete')&&<div className="mt-4"><label className="block text-sm font-semibold mb-1 text-slate-800 dark:text-slate-200">{mode==='delete'?'Pages to delete':'Page numbers / ranges'} (example: 1, 3-5)</label><input value={range} onChange={e=>setRange(e.target.value)} className="w-full sm:max-w-xs rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2" /></div>}
+        {mode==='reorder'&&<div className="mt-4"><label className="block text-sm font-semibold mb-1 text-slate-800 dark:text-slate-200">New page order (comma separated, e.g. 3,1,2)</label><input value={pageOrder} onChange={e=>setPageOrder(e.target.value)} className="w-full sm:max-w-md rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2" /></div>}
+        {mode==='crop'&&<div className="mt-4"><label className="block text-sm font-semibold mb-1 text-slate-800 dark:text-slate-200">Crop margin on all sides (%)</label><input type="number" min="0" max="40" value={cropMargin} onChange={e=>setCropMargin(e.target.value)} className="w-full sm:max-w-xs rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2" /><p className="mt-1 text-xs text-slate-500">This applies the same crop margin to every page.</p></div>}
+        {mode==='metadata'&&<div className="mt-4 grid gap-3 sm:grid-cols-2"><label className="block text-sm">Title<input value={metaTitle} onChange={e=>setMetaTitle(e.target.value)} placeholder="Document title" className="mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2" /></label><label className="block text-sm">Author<input value={metaAuthor} onChange={e=>setMetaAuthor(e.target.value)} placeholder="Author name" className="mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2" /></label><label className="block text-sm">Subject<input value={metaSubject} onChange={e=>setMetaSubject(e.target.value)} placeholder="Document subject" className="mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2" /></label><p className="text-xs text-slate-500 self-end">Blank fields keep existing metadata.</p></div>}
+        {mode==='watermark'&&<div className="mt-4"><label className="block text-sm font-semibold mb-1 text-slate-800 dark:text-slate-200">Watermark text</label><input value={watermark} onChange={e=>setWatermark(e.target.value)} maxLength={80} className="w-full sm:max-w-md rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2" /></div>}
+        {mode==='signature'&&<div className="mt-4"><label className="block text-sm font-semibold mb-1 text-slate-800 dark:text-slate-200">Signature text (first page)</label><input value={signature} onChange={e=>setSignature(e.target.value)} maxLength={60} className="w-full sm:max-w-md rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2" /></div>}
+        {mode==='forms'&&formFields.length>0&&<div className="mt-4 space-y-3 rounded-xl border border-slate-200 dark:border-slate-700 p-4"><p className="text-sm font-semibold">Detected form fields</p>{formFields.map(field=><label key={field.name} className="block text-sm"><span className="mb-1 block font-medium">{field.name}</span>{field.type==='checkbox'?<input type="checkbox" checked={!!formValues[field.name]} onChange={e=>setFormValues(v=>({...v,[field.name]:e.target.checked}))} />:field.type==='dropdown'||field.type==='radio'?<select value={formValues[field.name]||''} onChange={e=>setFormValues(v=>({...v,[field.name]:e.target.value}))} className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2"><option value="">Select...</option>{field.options.map(option=><option key={option} value={option}>{option}</option>)}</select>:field.type==='text'?<input value={formValues[field.name]||''} onChange={e=>setFormValues(v=>({...v,[field.name]:e.target.value}))} className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2" />:<span className="text-xs text-amber-600">Unsupported field type</span>}</label>)}</div>}
+        {files.length>0&&<p className="text-xs text-slate-500 mt-3">{files.length} file(s) selected</p>}
+        <button disabled={busy||!files.length} onClick={run} className="mt-5 w-full sm:w-auto rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3 font-bold text-white disabled:opacity-50">{busy?'Processing...':mode==='merge'?'Merge PDF':mode==='split'?'Split PDF':mode==='jpg'?'Convert to PDF':mode==='signature'?'Add Signature':mode==='extract'?'Extract Text':mode==='ocr'?'Run OCR':mode==='pdfjpg'?'Convert to JPG':mode==='docx'?'Convert to Word':mode==='excel'?'Convert to Excel':mode==='repair'?'Re-save PDF':mode==='delete'?'Delete Pages':mode==='reorder'?'Reorder Pages':mode==='metadata'?'Update Metadata':mode==='crop'?'Crop PDF':mode==='summary'?'Create Quick Summary':mode==='forms'?(formFields.length?'Fill & Download PDF':'Detect Form Fields'):mode==='rotate'?'Rotate PDF':mode==='number'?'Add Page Numbers':'Add Watermark'}</button>
+        {message&&<p role="status" className="mt-4 text-sm font-medium text-slate-700 dark:text-slate-200">{message}</p>}
+        <p className="mt-4 text-xs text-slate-500 dark:text-slate-400">Processing is performed in your browser. Files are not uploaded by these tools. Typed signature is not a certified e-signature. Page reorder requires every page number exactly once. Metadata fields left blank remain unchanged. OCR uses English recognition and may make mistakes. Word/Excel exports extract text and do not preserve the exact PDF layout or tables. Fill PDF Form works only with existing interactive form fields. Quick Summary uses Gemini AI through a secure server endpoint. Selectable PDF text is sent to the AI service for summarization; scanned PDFs need OCR first. Crop applies an equal margin to every page. Re-save is not full corruption repair. Files are processed in your browser.</p>
+      </div>
+    </div>
+  </section>;
+}
+
 // ============================================================================
 // 3. MAIN PDF COMPRESSOR WIDGET COMPONENT
 // ============================================================================
@@ -428,6 +855,13 @@ function PdfCompressorTool({ initialPreset = 'recommended', onNavigate }) {
   useEffect(() => {
     setSelectedPreset(initialPreset || 'recommended');
   }, [initialPreset]);
+
+  // Pre-load PDF libraries when the browser is idle so the first upload feels instant
+  useEffect(() => {
+    const warm = () => { ensurePdfLibraries().catch(() => {}); };
+    if ('requestIdleCallback' in window) { const id = window.requestIdleCallback(warm, { timeout: 4000 }); return () => window.cancelIdleCallback(id); }
+    const t = setTimeout(warm, 2500); return () => clearTimeout(t);
+  }, []);
 
   const validateAndLoadFile = async (selectedFile) => {
     setError('');
@@ -641,10 +1075,15 @@ function PdfCompressorTool({ initialPreset = 'recommended', onNavigate }) {
         }
       }
 
-      // Check if original file was already smaller than compressed output
-      if (bestBlob.size >= file.size && !targetBytes) {
+      // Never hand back a file that is bigger than what the user uploaded
+      if (bestBlob.size >= file.size) {
         bestBlob = file;
-        explanationNote = 'Your original PDF is already highly optimized! We preserved the original file to prevent unnecessary re-encoding.';
+        targetReached = !targetBytes || file.size <= targetBytes;
+        explanationNote = targetBytes && file.size <= targetBytes
+          ? `Your original PDF (${formatBytes(file.size)}) is already within the ${formatBytes(targetBytes)} target, so no compression was needed.`
+          : 'Your original PDF is already highly optimized, so we kept it instead of making it larger.';
+      } else {
+        explanationNote += ' Note: pages are saved as optimized images, so text in the compressed PDF may not be selectable.';
       }
 
       const savedBytes = Math.max(0, file.size - bestBlob.size);
@@ -780,7 +1219,7 @@ function PdfCompressorTool({ initialPreset = 'recommended', onNavigate }) {
                 {/* Page 1 Preview Thumbnail */}
                 <div className="w-20 h-28 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden flex items-center justify-center shrink-0">
                   {previewUrl ? (
-                    <img src={previewUrl} alt="PDF Page 1 Preview" className="w-full h-full object-cover" />
+                    <img src={previewUrl} alt="PDF Page 1 Preview" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                   ) : (
                     <FileText className="w-9 h-9 text-blue-600" />
                   )}
@@ -1245,7 +1684,7 @@ Return valid JSON matching the exact schema.`;
       .map(
         (p) => `  <url>
     <loc>https://shrinkpdf-ai-8leu.vercel.app${p.path}</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>${new Date().toISOString().slice(0, 10)}</lastmod>
     <changefreq>${p.slug === '/' ? 'daily' : 'weekly'}</changefreq>
     <priority>${p.slug === '/' ? '1.0' : '0.85'}</priority>
   </url>`
@@ -1843,8 +2282,18 @@ export default function App() {
   const [currentRoute, setCurrentRoute] = useState(getRouteFromPath); // '/', slug, 'admin', or '404'
 
   useEffect(() => { const handlePopState = () => setCurrentRoute(getRouteFromPath()); window.addEventListener('popstate', handlePopState); return () => window.removeEventListener('popstate', handlePopState); }, []);
+  useEffect(() => {
+    const addHint = (rel, href) => { if (!document.head.querySelector(`link[rel="${rel}"][href="${href}"]`)) { const link = document.createElement('link'); link.rel = rel; link.href = href; if (rel === 'preconnect') link.crossOrigin = 'anonymous'; document.head.appendChild(link); } };
+    addHint('preconnect', 'https://cdnjs.cloudflare.com');
+    addHint('preconnect', 'https://cdn.jsdelivr.net');
+    const style = document.createElement('style'); style.dataset.mobilePerf = '1'; style.textContent = `@media (prefers-reduced-motion: reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}} img{height:auto;max-width:100%}`;
+    if (!document.head.querySelector('style[data-mobile-perf="1"]')) { style.setAttribute('data-mobile-perf','1'); document.head.appendChild(style); }
+    return () => { const node=document.head.querySelector('style[data-mobile-perf="1"]'); if(node) node.remove(); };
+  }, []);
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
   const [showSeoInspector, setShowSeoInspector] = useState(false);
+  // Owner-only tools stay hidden from visitors. Open the site with ?owner=1 to see them.
+  const isOwner = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('owner') === '1';
 
   const activePage = useMemo(() => {
     if (currentRoute === 'admin' || currentRoute === '404') return null;
@@ -1866,10 +2315,38 @@ export default function App() {
       let canonical = document.querySelector('link[rel="canonical"]');
       if (!canonical) { canonical = document.createElement('link'); canonical.setAttribute('rel', 'canonical'); document.head.appendChild(canonical); }
       canonical.setAttribute('href', canonicalUrl);
+
+      // Keep social previews and crawler directives in sync with the active route.
+      const setMeta = (attribute, key, content) => {
+        let tag = document.head.querySelector(`meta[${attribute}="${key}"]`);
+        if (!tag) {
+          tag = document.createElement('meta');
+          tag.setAttribute(attribute, key);
+          document.head.appendChild(tag);
+        }
+        tag.setAttribute('content', content);
+      };
+      document.documentElement.lang = activePage.lang || 'en';
+      setMeta('property', 'og:locale', activePage.lang === 'hi' ? 'hi_IN' : 'en_US');
+      setMeta('property', 'og:type', 'website');
+      setMeta('property', 'og:site_name', 'ShrinkPDF AI');
+      setMeta('property', 'og:title', activePage.metaTitle);
+      setMeta('property', 'og:description', activePage.metaDescription);
+      setMeta('property', 'og:url', canonicalUrl);
+      setMeta('name', 'twitter:card', 'summary');
+      setMeta('name', 'twitter:title', activePage.metaTitle);
+      setMeta('name', 'twitter:description', activePage.metaDescription);
+      setMeta('name', 'robots', 'index,follow,max-image-preview:large');
     } else if (currentRoute === 'admin') {
       document.title = 'Admin SEO Studio – ShrinkPDF AI';
+      let robots = document.querySelector('meta[name="robots"]');
+      if (!robots) { robots = document.createElement('meta'); robots.setAttribute('name', 'robots'); document.head.appendChild(robots); }
+      robots.setAttribute('content', 'noindex,nofollow');
     } else {
       document.title = '404 Page Not Found – ShrinkPDF AI';
+      let robots = document.querySelector('meta[name="robots"]');
+      if (!robots) { robots = document.createElement('meta'); robots.setAttribute('name', 'robots'); document.head.appendChild(robots); }
+      robots.setAttribute('content', 'noindex,follow');
     }
     setOpenFaqIndex(0);
   }, [activePage, currentRoute]);
@@ -1894,9 +2371,18 @@ export default function App() {
         },
         {
           '@type': 'SoftwareApplication',
-          name: activePage.metaTitle,
+          name: 'ShrinkPDF AI – Free Online PDF Compressor',
+          description: activePage.metaDescription,
+          url: `https://shrinkpdf-ai-8leu.vercel.app${activePage.path}`,
           applicationCategory: 'UtilitiesApplication',
+          applicationSubCategory: 'PDF compression',
           operatingSystem: 'Any (Web Browser)',
+          featureList: [
+            'Compress PDF files online in a web browser',
+            'Target-size presets from 50KB to 2MB',
+            'Browser-based PDF processing',
+            'No account required to use the compressor'
+          ],
           offers: {
             '@type': 'Offer',
             price: '0',
@@ -1989,7 +2475,7 @@ export default function App() {
 
             {/* Right Controls: SEO Inspector, Admin Studio, Dark/Light Theme */}
             <div className="flex items-center gap-2">
-              {activePage && (
+              {isOwner && activePage && (
                 <button
                   onClick={() => setShowSeoInspector(!showSeoInspector)}
                   className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
@@ -2000,7 +2486,7 @@ export default function App() {
                 </button>
               )}
 
-              <button
+              {(isOwner || currentRoute === 'admin') && <button
                 onClick={() => navigateTo(currentRoute === 'admin' ? '/' : 'admin')}
                 className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
                   currentRoute === 'admin'
@@ -2010,7 +2496,7 @@ export default function App() {
               >
                 <LayoutDashboard className="w-3.5 h-3.5" />
                 {currentRoute === 'admin' ? 'Back to Compressor' : 'AI SEO Admin'}
-              </button>
+              </button>}
 
               <button
                 onClick={() => setDarkMode(!darkMode)}
@@ -2022,8 +2508,17 @@ export default function App() {
             </div>
           </div>
 
+          {/* Mobile quick-size chips (desktop nav is hidden on small screens) */}
+          <nav aria-label="Quick target sizes" className="lg:hidden border-t border-slate-200/70 dark:border-slate-800/80 overflow-x-auto">
+            <div className="flex items-center gap-2 px-4 py-2 w-max">
+              {[['50KB','pdf-compressor-to-50kb'],['100KB','pdf-compressor-to-100kb'],['200KB','pdf-compressor-to-200kb'],['300KB','pdf-compressor-to-300kb'],['500KB','pdf-compressor-to-500kb'],['1MB','pdf-compressor-to-1mb'],['2MB','pdf-compressor-to-2mb'],['हिंदी','pdf-size-kam-kaise-kare']].map(([label, slug]) => (
+                <button key={slug} onClick={() => navigateTo(slug)} className={`px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap border ${currentRoute === slug ? 'bg-blue-600 text-white border-blue-600' : 'border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300'}`}>{label}</button>
+              ))}
+            </div>
+          </nav>
+
           {/* Collapsible Live SEO Metadata & Schema Inspector Drawer */}
-          {showSeoInspector && activePage && (
+          {isOwner && showSeoInspector && activePage && (
             <div className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 sm:px-8 py-4">
               <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
                 <div>
@@ -2125,6 +2620,11 @@ export default function App() {
                     <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
                       {activePage.subtitle}
                     </p>
+                    {activePage.slug === '/' && (
+                      <button onClick={() => navigateTo('pdf-size-kam-kaise-kare')} className="mt-4 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+                        हिंदी में पढ़ें: PDF size kam kaise kare →
+                      </button>
+                    )}
                   </div>
 
                   {/* Interactive PDF Compressor Tool */}
@@ -2134,6 +2634,8 @@ export default function App() {
                   />
                 </div>
               </section>
+
+              <ExtraPdfTools />
 
               {/* TARGET SIZE CARDS SECTION */}
               <section className="py-16 bg-slate-50/70 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800/80">
@@ -2325,7 +2827,7 @@ export default function App() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="text-center max-w-2xl mx-auto mb-12">
                     <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mb-3">
-                      Why Millions Prefer Our Online PDF Compressor
+                      Why Use This Online PDF Compressor
                     </h2>
                     <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
                       Built for speed, privacy, and strict file-size compliance across every device.
@@ -2352,6 +2854,27 @@ export default function App() {
                         </div>
                       );
                     })}
+                  </div>
+                </div>
+              </section>
+
+              {/* CRAWLABLE INTERNAL LINKS TO USEFUL PDF TASK PAGES */}
+              <section className="py-12 border-t border-slate-200/70 dark:border-slate-800">
+                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white mb-3">More PDF Compression Tools & Guides</h2>
+                  <p className="text-sm text-slate-600 dark:text-slate-400 mb-6">Choose a guide for the document you need to prepare. Each page opens the compressor with a relevant starting size.</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {pages.filter((page) => !page.isLegal && page.slug !== activePage.slug && page.slug !== '/').map((page) => (
+                      <a
+                        key={page.slug}
+                        href={page.path}
+                        onClick={(event) => { event.preventDefault(); navigateTo(page.slug); }}
+                        className="group rounded-xl border border-slate-200 dark:border-slate-700 p-4 hover:border-blue-400 hover:bg-blue-50/50 dark:hover:bg-slate-800 transition-colors"
+                      >
+                        <span className="font-semibold text-sm text-slate-900 dark:text-white group-hover:text-blue-600">{page.label}</span>
+                        <span className="block text-xs text-slate-500 dark:text-slate-400 mt-1">{page.metaDescription}</span>
+                      </a>
+                    ))}
                   </div>
                 </div>
               </section>
@@ -2415,7 +2938,7 @@ export default function App() {
                   <span>ShrinkPDF AI</span>
                 </div>
                 <p className="text-xs leading-relaxed text-slate-400">
-                  Free, private, browser-based online PDF compressor with exact target KB calibration and AI-powered SEO publishing tools.
+                  Free, private, browser-based PDF compressor with exact target sizes like 50KB, 100KB and 200KB. No sign-up, no watermark.
                 </p>
               </div>
 
@@ -2459,20 +2982,10 @@ export default function App() {
 
               <div>
                 <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-3">
-                  Platform & Technical SEO
+                  Guides & Company
                 </h4>
                 <ul className="space-y-2 text-xs">
-                  <li>
-                    <button onClick={() => navigateTo('admin')} className="hover:text-white transition-colors">
-                      AI SEO Content Generator
-                    </button>
-                  </li>
-                  <li>
-                    <button onClick={() => navigateTo('admin')} className="hover:text-white transition-colors">
-                      XML Sitemap & Robots.txt
-                    </button>
-                  </li>
-                  {['about-us', 'contact-us', 'privacy-policy', 'terms-and-conditions'].map((slug) => {
+                  {['pdf-size-kam-kaise-kare', 'compress-pdf-for-job-application', 'compress-pdf-for-government-forms', 'compress-pdf-for-scholarship-admission', 'about-us', 'contact-us', 'privacy-policy', 'terms-and-conditions'].map((slug) => {
                     const page = pages.find((item) => item.slug === slug);
                     return page ? <li key={slug}><button onClick={() => navigateTo(slug)} className="hover:text-white transition-colors">{page.label}</button></li> : null;
                   })}
